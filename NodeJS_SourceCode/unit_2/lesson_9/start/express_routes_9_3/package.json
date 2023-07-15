@@ -1,12 +1,12 @@
 {
-  "name": "express_routes",
+  "name": "express_routes_9_3",
   "version": "1.0.0",
-  "description": "A Node.js application using Express.js",
+  "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Jon Wexler",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2"
