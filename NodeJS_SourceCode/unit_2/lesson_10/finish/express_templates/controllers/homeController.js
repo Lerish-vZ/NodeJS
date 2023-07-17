@@ -7,4 +7,4 @@ exports.sendReqParam = (req, res) => {
 
 exports.respondWithName = (req, res) => {
   res.render("index");
-};
+}; //respond with a custom EJS view

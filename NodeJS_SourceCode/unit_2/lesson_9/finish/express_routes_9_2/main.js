@@ -7,9 +7,9 @@ const port = 3000,
 app.use(
   express.urlencoded({
     extended: false
-  })
+  }) //tell yout Express.js application to parse URL-encoded data
 );
-app.use(express.json());
+app.use(express.json()); //analyzes incoming request bodies
 
 app.use((req, res, next) => { 
   console.log(`request made to: ${req.url}`);
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 });
 
 app.post("/", (req, res) => { //set up a POST route
-  console.log(req.body);
+  console.log(req.body); //log requests body
   console.log(req.query);
   res.send("POST Successful!");
 });

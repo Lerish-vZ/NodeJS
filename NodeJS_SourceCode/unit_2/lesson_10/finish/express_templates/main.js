@@ -3,19 +3,19 @@
 const express = require("express"),
   app = express(),
   homeController = require("./controllers/homeController"),
-  layouts = require("express-ejs-layouts");
+  layouts = require("express-ejs-layouts"); 
 
 app.set("port", process.env.PORT || 3000);
-app.set("view engine", "ejs");
+app.set("view engine", "ejs"); //sets view engine as ejs
 
-app.use(layouts);
+app.use(layouts); //let's Express.js know to use this package as an additional middleware layer
 app.use(
   express.urlencoded({
     extended: false
   })
 );
 app.use(express.json());
-
+ 
 app.use((req, res, next) => {
   console.log(`request made to: ${req.url}`);
   next();
