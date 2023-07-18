@@ -7,7 +7,7 @@ const port = 3000,
 app.use(
   express.urlencoded({
     extended: false
-  }) //tell yout Express.js application to parse URL-encoded data
+  }) //tell your Express.js application to parse URL-encoded data
 );
 app.use(express.json()); //analyzes incoming request bodies
 

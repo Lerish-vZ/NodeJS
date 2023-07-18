@@ -5,6 +5,11 @@ exports.sendReqParam = (req, res) => {
   res.send(`This is the page for ${veg}`);
 };
 
+// exports.respondWithName = (req, res) => {
+//   res.render("index");
+// }; //respond with a custom EJS view
+
 exports.respondWithName = (req, res) => {
-  res.render("index");
-}; //respond with a custom EJS view
+  let paramsName = req.params.myName;
+  res.render("index", { name: paramsName });
+  };
