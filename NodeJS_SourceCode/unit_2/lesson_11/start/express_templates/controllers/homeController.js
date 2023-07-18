@@ -5,6 +5,6 @@ exports.sendReqParam = (req, res) => {
   res.send(`This is the page for ${veg}`);
 };
 
-exports.respondWithName = (req, res) => {
-  res.render("index");
-};
+// exports.respondWithName = (req, res) => {
+//   res.render("index");
+// };
