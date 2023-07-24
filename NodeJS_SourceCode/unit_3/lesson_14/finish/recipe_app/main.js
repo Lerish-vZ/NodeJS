@@ -4,18 +4,19 @@ const express = require("express"),
   app = express(),
   errorController = require("./controllers/errorController"),
   homeController = require("./controllers/homeController"),
-  layouts = require("express-ejs-layouts"),
-  mongoose = require("mongoose"),
+  layouts = require("express-ejs-layouts"), 
+  mongoose = require("mongoose"), 
   Subscriber = require("./models/subscriber");
 
 mongoose.connect(
-  "mongodb://localhost:27017/recipe_db",
+  //"mongodb://localhost:27017/recipe_db", 
+  "mongodb://127.0.0.1/recipe_db", //set up the connection to your database
   { useNewUrlParser: true }
 );
 mongoose.set("useCreateIndex", true);
-const db = mongoose.connection;
+const db = mongoose.connection; //assign the database to the db variable
 
-db.once("open", () => {
+db.once("open", () => { //log a message when the application connects to the database
   console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
@@ -25,7 +26,7 @@ var myQuery = Subscriber.findOne({
 
 myQuery.exec((error, data) => {
   if (data) console.log(data.name);
-});
+});//run a query with a callback function to handle errors and data
 
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "ejs");
