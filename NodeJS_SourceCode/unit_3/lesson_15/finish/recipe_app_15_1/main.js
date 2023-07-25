@@ -4,13 +4,13 @@ const express = require("express"),
   app = express(),
   errorController = require("./controllers/errorController"),
   homeController = require("./controllers/homeController"),
-  subscribersController = require("./controllers/subscribersController"),
+  subscribersController = require("./controllers/subscribersController"), //important
   layouts = require("express-ejs-layouts"),
   mongoose = require("mongoose"),
-  Subscriber = require("./models/subscriber");
+  Subscriber = require("./models/subscriber"); //require th subscriber module 
 
 mongoose.connect(
-  "mongodb://localhost:27017/recipe_db",
+  "mongodb://127.0.0.1/recipe_db",
   { useNewUrlParser: true }
 );
 mongoose.set("useCreateIndex", true);
@@ -44,8 +44,8 @@ app.use(homeController.logRequestPaths);
 app.get("/name", homeController.respondWithName);
 app.get("/items/:vegetable", homeController.sendReqParam);
 
-app.get("/subscribers", subscribersController.getAllSubscribers, (req, res, next) => {
-  res.render("subscribers", { subscribers: req.data });
+app.get("/subscribers", subscribersController.getAllSubscribers, (req, res, next) => { //pass the request to getAllSubscribers function 
+  res.render("subscribers", { subscribers: req.data }); //makes a call to render a view called subscribers.ejs and passes subscribers from db to the view 
 });
 
 app.get("/", homeController.index);
