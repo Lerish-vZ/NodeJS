@@ -1,13 +1,15 @@
 "use strict";
 
+//makes a connection to your local database and loops through an array of subscribers to create
+
 const mongoose = require("mongoose"),
   Subscriber = require("./models/subscriber");
 
-mongoose.connect(
+mongoose.connect( //set up the connection to the database
   "mongodb://localhost:27017/recipe_db",
   { useNewUrlParser: true }
 );
-mongoose.connection;
+mongoose.connection; 
 
 var contacts = [
   {
@@ -28,14 +30,14 @@ var contacts = [
 ];
 
 Subscriber.deleteMany()
-  .exec()
+  .exec() //remove all existing data 
   .then(() => {
     console.log("Subscriber data is empty!");
   });
 
 var commands = [];
 
-contacts.forEach(c => {
+contacts.forEach(c => { //loop through subscriber objects to create promises
   commands.push(
     Subscriber.create({
       name: c.name,
@@ -44,7 +46,7 @@ contacts.forEach(c => {
   );
 });
 
-Promise.all(commands)
+Promise.all(commands) //log confirmation after promises resolve 
   .then(r => {
     console.log(JSON.stringify(r));
     mongoose.connection.close();
