@@ -51,8 +51,8 @@ app.get("/subscribers", subscribersController.getAllSubscribers, (req, res, next
 app.get("/", homeController.index);
 app.get("/courses", homeController.showCourses);
 
-app.get("/contact", subscribersController.getSubscriptionPage);
-app.post("/subscribe", subscribersController.saveSubscriber);
+app.get("/contact", subscribersController.getSubscriptionPage); //add a get route for the subscription page
+app.post("/subscribe", subscribersController.saveSubscriber); //add a post route to handle subscription data
 
 app.use(errorController.logErrors);
 app.use(errorController.respondNoResourceFound);

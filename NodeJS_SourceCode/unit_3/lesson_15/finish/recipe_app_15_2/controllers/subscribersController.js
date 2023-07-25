@@ -10,18 +10,18 @@ exports.getAllSubscribers = (req, res, next) => {
   });
 };
 
-exports.getSubscriptionPage = (req, res) => {
+exports.getSubscriptionPage = (req, res) => { //add an action to render the contact page
   res.render("contact");
 };
 
-exports.saveSubscriber = (req, res) => {
+exports.saveSubscriber = (req, res) => { //add an acton to save subscribers
   let newSubscriber = new Subscriber({
     name: req.body.name,
     email: req.body.email,
     zipCode: req.body.zipCode
-  });
+  }); //create a new subscriber
   newSubscriber.save((error, result) => {
     if (error) res.send(error);
-    res.render("thanks");
+    res.render("thanks"); //save a new subscriber
   });
 };
