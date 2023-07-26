@@ -4,7 +4,7 @@ const express = require("express"),
   app = express(),
   homeController = require("./controllers/homeController"),
   errorController = require("./controllers/errorController"),
-  subscribersController = require("./controllers/subscribersController"),
+  subscribersController = require("./controllers/subscribersController"), //require the subscribers controller
   layouts = require("express-ejs-layouts");
 
 const mongoose = require("mongoose"); //require mongoose
@@ -28,9 +28,9 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/subscribers", subscribersController.getAllSubscribers);
-app.get("/contact", subscribersController.getSubscriptionPage);
-app.post("/subscribe", subscribersController.saveSubscriber);
+app.get("/subscribers", subscribersController.getAllSubscribers); //add a route to view all subscribers
+app.get("/contact", subscribersController.getSubscriptionPage); //add a route to view the contact page
+app.post("/subscribe", subscribersController.saveSubscriber); //add a route to handle posted form data
 
 app.get("/courses", homeController.showCourses);
 app.post("/contact", homeController.postedSignUpForm);
