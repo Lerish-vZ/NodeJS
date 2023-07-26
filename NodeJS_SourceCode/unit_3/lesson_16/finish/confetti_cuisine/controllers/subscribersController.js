@@ -1,8 +1,8 @@
 "use strict";
 
-const Subscriber = require("../models/subscriber");
+const Subscriber = require("../models/subscriber"); //require the subscriber model
 
-exports.getAllSubscribers = (req, res) => {
+exports.getAllSubscribers = (req, res) => { //retrieve all subscribers
   Subscriber.find({})
     .exec()
     .then(subscribers => {
@@ -19,11 +19,11 @@ exports.getAllSubscribers = (req, res) => {
     });
 };
 
-exports.getSubscriptionPage = (req, res) => {
+exports.getSubscriptionPage = (req, res) => { //render the contact page
   res.render("contact");
 };
 
-exports.saveSubscriber = (req, res) => {
+exports.saveSubscriber = (req, res) => { //save subscribers
   let newSubscriber = new Subscriber({
     name: req.body.name,
     email: req.body.email,

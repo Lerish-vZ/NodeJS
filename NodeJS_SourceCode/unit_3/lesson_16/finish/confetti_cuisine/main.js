@@ -7,9 +7,9 @@ const express = require("express"),
   subscribersController = require("./controllers/subscribersController"),
   layouts = require("express-ejs-layouts");
 
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); //require mongoose
 mongoose.connect(
-  "mongodb://localhost:27017/confetti_cuisine",
+  "mongodb://127.0.0.1/confetti_cuisine", //set up the database connection
   { useNewUrlParser: true }
 );
 mongoose.set("useCreateIndex", true);
