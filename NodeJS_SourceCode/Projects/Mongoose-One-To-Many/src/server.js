@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); //import mongoose
 
-const db = require("./models");
+const db = require("./models"); 
 
 const createTutorial = function (tutorial) {
   return db.Tutorial.create(tutorial).then((docTutorial) => {
@@ -143,7 +143,7 @@ const run = async function () {
 };
 
 mongoose
-  .connect("mongodb://localhost/bezkoder_db", {
+  .connect("mongodb://127.0.0.1/bezkoder_db", { //connect app to MongoDB database
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

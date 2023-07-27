@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); //import mongoose 
 
-const Category = mongoose.model(
+const Category = mongoose.model( 
   "Category",
   new mongoose.Schema({
     name: String,

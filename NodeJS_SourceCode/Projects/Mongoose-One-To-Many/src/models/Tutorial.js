@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Tutorial = mongoose.model(
+const Tutorial = mongoose.model( //create model
   "Tutorial",
   new mongoose.Schema({
     title: String,
@@ -19,4 +19,4 @@ const Tutorial = mongoose.model(
   })
 );
 
-module.exports = Tutorial;
+module.exports = Tutorial; 
