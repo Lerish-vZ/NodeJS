@@ -11,7 +11,7 @@
     <% users.forEach(user => { %>
     <tr>
       <td>
-        <a href="<%= `/users/${user._id}` %>">
+        <a href="<%= `/users/${user._id}` %>"> <!-- embed the users name and id in html-->
           <%= user.fullName %>
         </a>
       </td>

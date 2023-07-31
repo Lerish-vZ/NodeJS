@@ -43,8 +43,8 @@ router.get("/", homeController.index);
 router.get("/contact", homeController.getSubscriptionPage);
 
 router.get("/users", usersController.index, usersController.indexView);
-router.get("/users/new", usersController.new);
-router.post("/users/create", usersController.create, usersController.redirectView);
+router.get("/users/new", usersController.new); //handle requests to view the creation form
+router.post("/users/create", usersController.create, usersController.redirectView); //handle requests to submit data from the creation form and display a view
 router.get("/users/:id", usersController.show, usersController.showView);
 
 router.get("/subscribers", subscribersController.index, subscribersController.indexView);
