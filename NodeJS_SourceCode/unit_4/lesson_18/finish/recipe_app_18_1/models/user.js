@@ -29,7 +29,7 @@ const mongoose = require("mongoose"),
       password: {
         type: String,
         required: true
-      }, //add a password propertyy=
+      }, //add a password property
       courses: [{ type: Schema.Types.ObjectId, ref: "Course" }], //add a courses property to connect users to courses
       subscribedAccount: { //add a subscribedAccount to connect users to subscribers
         type: Schema.Types.ObjectId,
