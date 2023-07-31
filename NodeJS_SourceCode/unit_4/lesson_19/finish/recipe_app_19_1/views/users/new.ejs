@@ -1,11 +1,11 @@
 <div class="data-form">
-  <form class="form-signin" action="/users/create" method="POST">
+  <form class="form-signin" action="/users/create" method="POST"> <!-- Build a form to create user accounts -->
     <h2 class="form-signin-heading">Create a new user:</h2>
-    <label for="inputFirstName">First Name</label>
+    <label for="inputFirstName">First Name</label> <!-- add user properties as inputs to the form-->
     <input type="text" name="first" id="inputFirstName" class="form-control" placeholder="First" autofocus>
     <label for="inputLastName">Last Name</label>
     <input type="text" name="last" id="inputLastName" class="form-control" placeholder="Last">
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">Password</label> <!-- apply htlm attributes to protect password and email fields-->
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
     <label for="inputEmail">Email address</label>
     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required>
