@@ -1,6 +1,6 @@
 "use strict";
 
-const User = require("../models/user");
+const User = require("../models/user"); //require the user model
 
 module.exports = {
   index: (req, res, next) => {
@@ -11,10 +11,10 @@ module.exports = {
       })
       .catch(error => {
         console.log(`Error fetching users: ${error.message}`);
-        next(error);
+        next(error); 
       });
   },
   indexView: (req, res) => {
-    res.render("users/index");
+    res.render("users/index"); //render the index page with an array of users
   }
 };
