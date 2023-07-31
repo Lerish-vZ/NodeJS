@@ -2,9 +2,10 @@
 
 const mongoose = require("mongoose"),
   { Schema } = mongoose,
-  userSchema = new Schema(
+
+  userSchema = new Schema( //create the user schema
     {
-      name: {
+      name: { //add first and last name properties
         first: {
           type: String,
           trim: true
@@ -28,19 +29,19 @@ const mongoose = require("mongoose"),
       password: {
         type: String,
         required: true
-      },
-      courses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
-      subscribedAccount: {
+      }, //add a password propertyy=
+      courses: [{ type: Schema.Types.ObjectId, ref: "Course" }], //add a courses property to connect users to courses
+      subscribedAccount: { //add a subscribedAccount to connect users to subscribers
         type: Schema.Types.ObjectId,
         ref: "Subscriber"
       }
     },
     {
-      timestamps: true
+      timestamps: true //add a timestamps property to record createdAt and updatedAt dates
     }
   );
 
-userSchema.virtual("fullName").get(function() {
+userSchema.virtual("fullName").get(function() { //add a virtual attribute to get the user's full name
   return `${this.name.first} ${this.name.last}`;
 });
 module.exports = mongoose.model("User", userSchema);
