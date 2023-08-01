@@ -5,7 +5,7 @@ const express = require("express"),
   router = express.Router(),
   layouts = require("express-ejs-layouts"),
   mongoose = require("mongoose"),
-  methodOverride = require("method-override"),
+  methodOverride = require("method-override"), //require the method-override module
   errorController = require("./controllers/errorController"),
   homeController = require("./controllers/homeController"),
   subscribersController = require("./controllers/subscribersController"),
@@ -38,11 +38,11 @@ router.use(
   })
 );
 
-router.use(
+router.use( 
   methodOverride("_method", {
     methods: ["POST", "GET"]
   })
-);
+); //configure the application router to use methodOverride as middleware
 
 router.use(express.json());
 router.use(homeController.logRequestPaths);
@@ -53,8 +53,8 @@ router.get("/contact", homeController.getSubscriptionPage);
 router.get("/users", usersController.index, usersController.indexView);
 router.get("/users/new", usersController.new);
 router.post("/users/create", usersController.create, usersController.redirectView);
-router.get("/users/:id/edit", usersController.edit);
-router.put("/users/:id/update", usersController.update, usersController.redirectView);
+router.get("/users/:id/edit", usersController.edit); //add routes to handle viewing
+router.put("/users/:id/update", usersController.update, usersController.redirectView); //process data from the edit form, and display the user show page
 router.get("/users/:id", usersController.show, usersController.showView);
 
 router.get("/subscribers", subscribersController.index, subscribersController.indexView);

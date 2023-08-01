@@ -61,21 +61,21 @@ module.exports = {
   showView: (req, res) => {
     res.render("users/show");
   },
-  edit: (req, res, next) => {
+  edit: (req, res, next) => { //add the edit action 
     let userId = req.params.id;
-    User.findById(userId)
+    User.findById(userId) //use findById to locate a user in the database by their ID
       .then(user => {
         res.render("users/edit", {
           user: user
-        });
+        }); //render the user edit page for a specific user in the database
       })
       .catch(error => {
         console.log(`Error fetching user by ID: ${error.message}`);
         next(error);
       });
   },
-  update: (req, res, next) => {
-    let userId = req.params.id,
+  update: (req, res, next) => { //add the update action 
+    let userId = req.params.id, 
       userParams = {
         name: {
           first: req.body.first,
@@ -84,13 +84,13 @@ module.exports = {
         email: req.body.email,
         password: req.body.password,
         zipCode: req.body.zipCode
-      };
+      }; //collect user parameters from request
     User.findByIdAndUpdate(userId, {
       $set: userParams
-    })
+    }) //use findByIdAndUpdate to locate a user by ID and update the document record in one command
       .then(user => {
         res.locals.redirect = `/users/${userId}`;
-        res.locals.user = user;
+        res.locals.user = user; //add user to response as a local variable, and call the next middleware function
         next();
       })
       .catch(error => {
