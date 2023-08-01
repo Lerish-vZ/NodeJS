@@ -100,7 +100,7 @@ module.exports = {
   },
   delete: (req, res, next) => {
     let userId = req.params.id;
-    User.findByIdAndRemove(userId)
+    User.findByIdAndRemove(userId) //deleting a user with the findByIdAndRemove method
       .then(() => {
         res.locals.redirect = "/users";
         next();
