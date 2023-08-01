@@ -4,7 +4,7 @@ const mongoose = require("mongoose"),
   User = require("./models/user");
 
 mongoose.connect(
-  "mongodb://127.0.0.1:27017/recipe_db",
+  "mongodb://127.0.0.1/recipe_db",
   { useNewUrlParser: true }
 );
 mongoose.set("useCreateIndex", true);
