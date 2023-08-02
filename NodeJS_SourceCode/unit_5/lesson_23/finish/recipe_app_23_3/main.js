@@ -74,7 +74,8 @@ router.get("/contact", homeController.getSubscriptionPage);
 
 router.get("/users", usersController.index, usersController.indexView);
 router.get("/users/new", usersController.new);
-router.post("/users/create", usersController.validate, usersController.create, usersController.redirectView);router.get("/users/login", usersController.login);
+router.post("/users/create", usersController.validate, usersController.create, usersController.redirectView); //add the validate middleware to the users create route
+router.get("/users/login", usersController.login);
 router.get("/users/login", usersController.login);
 router.post("/users/login", usersController.authenticate, usersController.redirectView);
 router.get("/users/:id/edit", usersController.edit);

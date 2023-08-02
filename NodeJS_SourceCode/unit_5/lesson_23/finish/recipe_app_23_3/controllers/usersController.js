@@ -150,13 +150,13 @@ module.exports = {
         next(error);
       });
   },
-  validate: (req, res, next) => {
+  validate: (req, res, next) => { //add the validate function 
     req
       .sanitizeBody("email")
       .normalizeEmail({
         all_lowercase: true
       })
-      .trim();
+      .trim(); //remove whitespace with the trim method 
     req.check("email", "Email is invalid").isEmail();
     req
       .check("zipCode", "Zip code is invalid")
@@ -166,18 +166,18 @@ module.exports = {
         min: 5,
         max: 5
       })
-      .equals(req.body.zipCode);
-    req.check("password", "Password cannot be empty").notEmpty();
+      .equals(req.body.zipCode); //validate the zipCode field
+    req.check("password", "Password cannot be empty").notEmpty(); //validate the password field
 
-    req.getValidationResult().then(error => {
+    req.getValidationResult().then(error => { //collect the results of previous validations 
       if (!error.isEmpty()) {
         let messages = error.array().map(e => e.msg);
-        req.skip = true;
-        req.flash("error", messages.join(" and "));
-        res.locals.redirect = "/users/new";
+        req.skip = true; //set skip property to true
+        req.flash("error", messages.join(" and ")); //add error messages as flash messages
+        res.locals.redirect = "/users/new"; //set redirect path for the new view
         next();
       } else {
-        next();
+        next(); //call the next middleware function 
       }
     });
   }
