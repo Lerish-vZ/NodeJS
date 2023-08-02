@@ -1,7 +1,7 @@
 "use strict";
 
 const User = require("../models/user"),
-  getUserParams = body => {
+  getUserParams = body => { //makes referencing all the user params easier later
     return {
       name: {
         first: body.first,
@@ -39,7 +39,7 @@ module.exports = {
     let userParams = getUserParams(req.body);
     User.create(userParams)
       .then(user => {
-        req.flash("success", `${user.fullName}'s account created successfully!`);
+        req.flash("success", `${user.fullName}'s account created successfully!`); //respond with a success flash message
         res.locals.redirect = "/users";
         res.locals.user = user;
         next();
@@ -47,9 +47,9 @@ module.exports = {
       .catch(error => {
         console.log(`Error saving user: ${error.message}`);
         res.locals.redirect = "/users/new";
-        req.flash("error", `Failed to create user account because: ${error.message}.`);
+        req.flash("error", `Failed to create user account because: ${error.message}.`); //respond with a failure flash message
         next();
-      });
+      }); //as soon as page is redirected to /users or /users/new, flash message is available to the view
   },
   redirectView: (req, res, next) => {
     let redirectPath = res.locals.redirect;

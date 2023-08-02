@@ -29,10 +29,10 @@
 	</div>
 
 	<div class="flashes">
-		<% if (flashMessages) { %>
+		<% if (flashMessages) { %> <!-- check whether flashMessages exist -->
 		<% if (flashMessages.success) { %>
 		<div class="flash success">
-			<%= flashMessages.success %>
+			<%= flashMessages.success %> <!-- display success messages -->
 		</div>
 		<% } else if (flashMessages.error) { %>
 		<div class="flash error">
