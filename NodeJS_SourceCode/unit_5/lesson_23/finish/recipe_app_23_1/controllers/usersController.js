@@ -120,13 +120,13 @@ module.exports = {
         next();
       });
   },
-  login: (req, res) => {
+  login: (req, res) => { //add the login action 
     res.render("users/login");
   },
-  authenticate: (req, res, next) => {
+  authenticate: (req, res, next) => { //add the authentication action
     User.findOne({
       email: req.body.email
-    })
+    }) //compare the form password with the database password
       .then(user => {
         if (user && user.password === req.body.password) {
           res.locals.redirect = `/users/${user._id}`;
@@ -142,7 +142,7 @@ module.exports = {
           next();
         }
       })
-      .catch(error => {
+      .catch(error => { //log errors to the console, and redirect
         console.log(`Error logging in user: ${error.message}`);
         next(error);
       });
