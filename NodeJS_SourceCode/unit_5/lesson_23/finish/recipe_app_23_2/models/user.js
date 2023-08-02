@@ -46,9 +46,9 @@ userSchema.virtual("fullName").get(function() {
   return `${this.name.first} ${this.name.last}`;
 });
 
-userSchema.pre("save", function(next) {
+userSchema.pre("save", function(next) { 
   let user = this;
-  if (user.subscribedAccount === undefined) {
+  if (user.subscribedAccount === undefined) { 
     Subscriber.findOne({
       email: user.email
     })
@@ -65,10 +65,10 @@ userSchema.pre("save", function(next) {
   }
 });
 
-userSchema.pre("save", function(next) {
+userSchema.pre("save", function(next) { //add a pre hook to the user schema
   let user = this;
   bcrypt
-    .hash(user.password, 10)
+    .hash(user.password, 10) //hash the user's password
     .then(hash => {
       user.password = hash;
       next();
@@ -79,9 +79,9 @@ userSchema.pre("save", function(next) {
     });
 });
 
-userSchema.methods.passwordComparison = function(inputPassword) {
+userSchema.methods.passwordComparison = function(inputPassword) { //add a function to compare hashed passwords
   let user = this;
-  return bcrypt.compare(inputPassword, user.password);
+  return bcrypt.compare(inputPassword, user.password);//compare the user password with the stored password
 };
 
 module.exports = mongoose.model("User", userSchema);

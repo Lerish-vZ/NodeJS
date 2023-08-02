@@ -123,12 +123,13 @@ module.exports = {
   login: (req, res) => {
     res.render("users/login");
   },
-  authenticate: (req, res, next) => {
+  authenticate: (req, res, next) => { //query for one user by email
     User.findOne({ email: req.body.email })
       .then(user => {
-        if (user) {
-          user.passwordComparison(req.body.password).then(passwordsMatch => {
-            if (passwordsMatch) {
+        if (user) { //check whether a user is found
+          user.passwordComparison(req.body.password) //call the password compasison method on the user model
+          .then(passwordsMatch => {
+            if (passwordsMatch) { //check whether the passwords match 
               res.locals.redirect = `/users/${user._id}`;
               req.flash("success", `${user.fullName}'s logged in successfully!`);
               res.locals.user = user;
@@ -136,7 +137,7 @@ module.exports = {
               req.flash("error", "Failed to log in user account: Incorrect Password.");
               res.locals.redirect = "/users/login";
             }
-            next();
+            next(); //call the next middleware function with redirect path and flash message set
           });
         } else {
           req.flash("error", "Failed to log in user account: User account not found.");
@@ -144,7 +145,7 @@ module.exports = {
           next();
         }
       })
-      .catch(error => {
+      .catch(error => { //log errors to console and pass to the next middleware error handler
         console.log(`Error logging in user: ${error.message}`);
         next(error);
       });
