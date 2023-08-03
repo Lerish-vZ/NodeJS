@@ -1,16 +1,16 @@
 "use strict";
 
-const router = require("express").Router(),
-  userRoutes = require("./userRoutes"),
+const router = require("express").Router(), //require the express.js router
+  userRoutes = require("./userRoutes"), //require all the route modules within the same directory
   subscriberRoutes = require("./subscriberRoutes"),
   courseRoutes = require("./courseRoutes"),
   errorRoutes = require("./errorRoutes"),
   homeRoutes = require("./homeRoutes");
 
-router.use("/users", userRoutes);
+router.use("/users", userRoutes); //use the routes from the relative route modules with namespaxes
 router.use("/subscribers", subscriberRoutes);
 router.use("/courses", courseRoutes);
 router.use("/", homeRoutes);
 router.use("/", errorRoutes);
 
-module.exports = router;
+module.exports = router; //export the router from index.js
