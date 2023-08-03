@@ -81,8 +81,8 @@ router.post(
 );
 router.get("/users/login", usersController.login); //route to the login action 
 router.post("/users/login", usersController.authenticate); //send posted data to an authen
-router.get("/users/logout", usersController.logout, usersController.redirectView);
-router.get("/users/:id/edit", usersController.edit); //add a route to logout and redirect to a view
+router.get("/users/logout", usersController.logout, usersController.redirectView); //add a route to logout and redirect to a view
+router.get("/users/:id/edit", usersController.edit); 
 router.put("/users/:id/update", usersController.update, usersController.redirectView);
 router.get("/users/:id", usersController.show, usersController.showView);
 router.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
