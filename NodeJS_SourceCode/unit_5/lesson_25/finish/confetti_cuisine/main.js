@@ -54,7 +54,7 @@ router.use(
     saveUninitialized: false
   }) //configure express.js to use sessions 
 );
-router.use(connectFlash());
+router.use(connectFlash()); 
 
 router.use(passport.initialize()); //configure express.js to initialize and use passport 
 router.use(passport.session()); //instruct passport to use sessions 
@@ -63,9 +63,9 @@ passport.serializeUser(User.serializeUser()); //set up passport to compact, encr
 passport.deserializeUser(User.deserializeUser());
 
 router.use((req, res, next) => {
-  res.locals.loggedIn = req.isAuthenticated();
+  res.locals.loggedIn = req.isAuthenticated(); 
   res.locals.currentUser = req.user;
-  res.locals.flashMessages = req.flash();
+  res.locals.flashMessages = req.flash(); //assign flash messages to a local variable
   next();
 });
 

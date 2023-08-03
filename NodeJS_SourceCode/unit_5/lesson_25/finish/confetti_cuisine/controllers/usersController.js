@@ -34,12 +34,12 @@ module.exports = {
     res.render("users/new");
   },
 
-  create: (req, res, next) => {
+  create: (req, res, next) => { //add the create action to register users
     if (req.skip) next();
     let newUser = new User(getUserParams(req.body));
     User.register(newUser, req.body.password, (e, user) => {
       if (user) {
-        req.flash("success", `${user.fullName}'s account created successfully!`);
+        req.flash("success", `${user.fullName}'s account created successfully!`); //respond with flash messages
         res.locals.redirect = "/users";
         next();
       } else {

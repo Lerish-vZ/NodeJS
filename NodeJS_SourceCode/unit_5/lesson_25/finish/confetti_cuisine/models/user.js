@@ -63,7 +63,7 @@ userSchema.pre("save", function(next) {
   }
 });
 
-userSchema.plugin(passportLocalMongoose, {
+userSchema.plugin(passportLocalMongoose, { //add the passport-local-mongoose module as a user schema plugin
   usernameField: "email"
 });
 
