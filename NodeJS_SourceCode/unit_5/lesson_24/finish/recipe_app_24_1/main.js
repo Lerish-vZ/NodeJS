@@ -10,13 +10,13 @@ const express = require("express"),
   cookieParser = require("cookie-parser"),
   connectFlash = require("connect-flash"),
   expressValidator = require("express-validator"),
-  passport = require("passport"),
+  passport = require("passport"), //require the passport module
   errorController = require("./controllers/errorController"),
   homeController = require("./controllers/homeController"),
   subscribersController = require("./controllers/subscribersController"),
   usersController = require("./controllers/usersController"),
   coursesController = require("./controllers/coursesController"),
-  User = require("./models/user");
+  User = require("./models/user"); //require the User model
 
 mongoose.Promise = global.Promise;
 
@@ -62,11 +62,11 @@ router.use(
   })
 );
 
-router.use(passport.initialize());
-router.use(passport.session());
-passport.use(User.createStrategy());
+router.use(passport.initialize()); //initialize passport
+router.use(passport.session()); //configure passport to use sessions in Express.js
+passport.use(User.createStrategy()); //configure the user's login strategy 
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.deserializeUser(User.deserializeUser()); //set up passport to serialize and deserialize your user data
 router.use(connectFlash());
 
 router.use((req, res, next) => {

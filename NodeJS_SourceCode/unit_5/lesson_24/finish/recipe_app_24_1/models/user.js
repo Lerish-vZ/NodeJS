@@ -64,6 +64,6 @@ userSchema.pre("save", function(next) {
 
 userSchema.plugin(passportLocalMongoose, {
   usernameField: "email"
-});
+}); //apply the passport-local-mongoose module as a plugin to the user schema 
 
 module.exports = mongoose.model("User", userSchema);
