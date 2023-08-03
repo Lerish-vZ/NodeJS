@@ -119,8 +119,8 @@ module.exports = {
   login: (req, res) => {
     res.render("users/login");
   },
-  authenticate: passport.authenticate("local", {
-    failureRedirect: "/users/login",
+  authenticate: passport.authenticate("local", { //call on passport to authenticate a user via the local strategy
+    failureRedirect: "/users/login", //set up success and failure flash messages and redirect paths based on the user's authentication status
     failureFlash: "Failed to login.",
     successRedirect: "/",
     successFlash: "Logged in!"
@@ -156,7 +156,7 @@ module.exports = {
       }
     });
   },
-  logout: (req, res, next) => {
+  logout: (req, res, next) => { //add an action to log users out 
     req.logout();
     req.flash("success", "You have been logged out!");
     res.locals.redirect = "/";

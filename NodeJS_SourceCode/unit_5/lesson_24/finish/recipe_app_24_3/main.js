@@ -70,8 +70,8 @@ passport.deserializeUser(User.deserializeUser());
 router.use(connectFlash());
 
 router.use((req, res, next) => {
-  res.locals.loggedIn = req.isAuthenticated();
-  res.locals.currentUser = req.user;
+  res.locals.loggedIn = req.isAuthenticated(); //set up the loggedIn variable to reflect passport login status
+  res.locals.currentUser = req.user; //set up the currentUser to reflect a logged-in user
   res.locals.flashMessages = req.flash();
   next();
 });
