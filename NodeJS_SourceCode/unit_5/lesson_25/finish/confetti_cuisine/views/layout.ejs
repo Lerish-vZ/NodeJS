@@ -30,14 +30,14 @@
 		</div>
 
 		<div class="login">
-			<% if (loggedIn) { %>
+			<% if (loggedIn) { %> <!-- check whether a user is logged in -->
 			<p>Logged in as
 				<a href="<%=`/users/${currentUser._id}`%>">
 					<%= currentUser.fullName %></a>
 				<span class="log-out">
 					<a href="/users/logout">Log out</a>
 				</span>
-			</p>
+			</p> <!-- display the current user's name and logout link-->
 			<%} else {%>
 			<a href="/users/login">Log In</a>
 			<% } %>

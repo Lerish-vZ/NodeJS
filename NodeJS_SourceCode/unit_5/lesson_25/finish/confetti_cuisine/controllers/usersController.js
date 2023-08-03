@@ -150,14 +150,14 @@ module.exports = {
       }
     });
   },
-  authenticate: passport.authenticate("local", {
+  authenticate: passport.authenticate("local", { //add authentication middleware with redirect and flash-message options
     failureRedirect: "/users/login",
     failureFlash: "Failed to login.",
     successRedirect: "/",
     successFlash: "Logged in!"
   }),
-  logout: (req, res, next) => {
-    req.logout();
+  logout: (req, res, next) => { 
+    req.logout(); //add an action to log users out
     req.flash("success", "You have been logged out!");
     res.locals.redirect = "/";
     next();

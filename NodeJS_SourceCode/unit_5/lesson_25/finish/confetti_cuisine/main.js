@@ -19,7 +19,7 @@ const express = require("express"),
   User = require("./models/user");
 
 mongoose.connect(
-  "mongodb://localhost:27017/confetti_cuisine",
+  "mongodb://127.0.0.1/confetti_cuisine",
   { useNewUrlParser: true }
 );
 mongoose.set("useCreateIndex", true);
@@ -63,8 +63,8 @@ passport.serializeUser(User.serializeUser()); //set up passport to compact, encr
 passport.deserializeUser(User.deserializeUser());
 
 router.use((req, res, next) => {
-  res.locals.loggedIn = req.isAuthenticated(); 
-  res.locals.currentUser = req.user;
+  res.locals.loggedIn = req.isAuthenticated(); //set up the loggedIn variable to reflect passport login status 
+  res.locals.currentUser = req.user; //set up the currentUser variable to reflect a logged-in user
   res.locals.flashMessages = req.flash(); //assign flash messages to a local variable
   next();
 });
