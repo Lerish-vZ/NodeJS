@@ -120,7 +120,7 @@ module.exports = {
   login: (req, res) => { //add an action to render my form for browser viewing
     res.render("users/login");
   },
-  validate: (req, res, next) => {
+  validate: (req, res, next) => { //add the validate action 
     req
       .sanitizeBody("email")
       .normalizeEmail({
@@ -136,14 +136,14 @@ module.exports = {
         min: 5,
         max: 5
       })
-      .equals(req.body.zipCode);
+      .equals(req.body.zipCode); //sanitize and check input field data
     req.check("password", "Password cannot be empty").notEmpty();
     req.getValidationResult().then(error => {
       if (!error.isEmpty()) {
         let messages = error.array().map(e => e.msg);
         req.skip = true;
         req.flash("error", messages.join(" and "));
-        res.locals.redirect = "/users/new";
+        res.locals.redirect = "/users/new"; //collect errors, and respond with flash messages
         next();
       } else {
         next();

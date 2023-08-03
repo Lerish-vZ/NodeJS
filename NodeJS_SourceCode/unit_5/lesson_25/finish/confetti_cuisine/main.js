@@ -75,7 +75,7 @@ router.get("/users", usersController.index, usersController.indexView);
 router.get("/users/new", usersController.new);
 router.post(
   "/users/create",
-  usersController.validate,
+  usersController.validate, //add validation middleware to the user create route
   usersController.create,
   usersController.redirectView
 );
