@@ -43,7 +43,7 @@ router.use(
 );
 router.use(express.json());
 
-router.use(cookieParser("secretCuisine123"));
+router.use(cookieParser("secretCuisine123")); //configure cookieParser with a secret key 
 router.use(
   expressSession({
     secret: "secretCuisine123",
@@ -52,14 +52,14 @@ router.use(
     },
     resave: false,
     saveUninitialized: false
-  })
+  }) //configure express.js to use sessions 
 );
 router.use(connectFlash());
 
-router.use(passport.initialize());
-router.use(passport.session());
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
+router.use(passport.initialize()); //configure express.js to initialize and use passport 
+router.use(passport.session()); //instruct passport to use sessions 
+passport.use(User.createStrategy()); //set up the default login strategy 
+passport.serializeUser(User.serializeUser()); //set up passport to compact, encrypt, and decrypt user data
 passport.deserializeUser(User.deserializeUser());
 
 router.use((req, res, next) => {
@@ -79,10 +79,10 @@ router.post(
   usersController.create,
   usersController.redirectView
 );
-router.get("/users/login", usersController.login);
-router.post("/users/login", usersController.authenticate);
+router.get("/users/login", usersController.login); //route to the login action 
+router.post("/users/login", usersController.authenticate); //send posted data to an authen
 router.get("/users/logout", usersController.logout, usersController.redirectView);
-router.get("/users/:id/edit", usersController.edit);
+router.get("/users/:id/edit", usersController.edit); //add a route to logout and redirect to a view
 router.put("/users/:id/update", usersController.update, usersController.redirectView);
 router.get("/users/:id", usersController.show, usersController.showView);
 router.delete("/users/:id/delete", usersController.delete, usersController.redirectView);

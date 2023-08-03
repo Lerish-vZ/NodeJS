@@ -117,7 +117,7 @@ module.exports = {
         next();
       });
   },
-  login: (req, res) => {
+  login: (req, res) => { //add an action to render my form for browser viewing
     res.render("users/login");
   },
   validate: (req, res, next) => {
