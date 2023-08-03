@@ -38,15 +38,15 @@ module.exports = {
   create: (req, res, next) => {
     if (req.skip) next();
     let newUser = new User(getUserParams(req.body));
-    User.register(newUser, req.body.password, (error, user) => {
+    User.register(newUser, req.body.password, (error, user) => { //register new users
       if (user) {
         req.flash("success", `${user.fullName}'s account created successfully!`);
         res.locals.redirect = "/users";
-        next();
+        next(); //set redirect for successful user creation 
       } else {
         req.flash("error", `Failed to create user account because: ${error.message}.`);
         res.locals.redirect = "/users/new";
-        next();
+        next(); //set redirect and log errors in flash messages
       }
     });
   },
