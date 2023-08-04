@@ -178,10 +178,10 @@ module.exports = {
   //     next(new Error("Invalid API token."));
   //   }
   // },
-  apiAuthenticate: (req, res, next) => {
+  apiAuthenticate: (req, res, next) => { //authenticate with the passport.authenticate method
     passport.authenticate("local", (errors, user) => {
       if (user) {
-        let signedToken = jsonWebToken.sign(
+        let signedToken = jsonWebToken.sign( //sign the JWT if a user exists with matching email and password
           {
             data: user._id,
             exp: new Date().setDate(new Date().getDate() + 1)
@@ -190,23 +190,23 @@ module.exports = {
         );
         res.json({
           success: true,
-          token: signedToken
+          token: signedToken //respond with the JWT
         });
       } else
         res.json({
           success: false,
-          message: "Could not authenticate user."
+          message: "Could not authenticate user." //respond with an error message
         });
     })(req, res, next);
   },
-  verifyJWT: (req, res, next) => {
-    let token = req.headers.token;
+  verifyJWT: (req, res, next) => { 
+    let token = req.headers.token; //retrieve the JWT from request headers
     if (token) {
-      jsonWebToken.verify(token, "secret_encoding_passphrase", (errors, payload) => {
+      jsonWebToken.verify(token, "secret_encoding_passphrase", (errors, payload) => { //verify the JWT and decode its payload
         if (payload) {
-          User.findById(payload.data).then(user => {
+          User.findById(payload.data).then(user => { //check for a user with the decoded user ID from the JWT payload
             if (user) {
-              next();
+              next(); //call the next middleware function if a user is found with the JWT ID.
             } else {
               res.status(httpStatus.FORBIDDEN).json({
                 error: true,
@@ -217,7 +217,7 @@ module.exports = {
         } else {
           res.status(httpStatus.UNAUTHORIZED).json({
             error: true,
-            message: "Cannot verify API token."
+            message: "Cannot verify API token." //respond with an error message if the token can't be verified
           });
           next();
         }
@@ -225,7 +225,7 @@ module.exports = {
     } else {
       res.status(httpStatus.UNAUTHORIZED).json({
         error: true,
-        message: "Provide Token"
+        message: "Provide Token" //respond with an error message if no token is found in the request headers
       });
     }
   }
