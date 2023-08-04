@@ -135,32 +135,32 @@ module.exports = {
     }
     res.json(errorObject);
   },
-  join: (req, res, next) => {
+  join: (req, res, next) => { //add the join action to let users join a course
     let courseId = req.params.id,
-      currentUser = req.user;
-    if (currentUser) {
+      currentUser = req.user; //get the course id and current user from the request
+    if (currentUser) { //check whether a current user is logged in 
       User.findByIdAndUpdate(currentUser, {
         $addToSet: {
-          courses: courseId
+          courses: courseId //update the user's courses field to contain the targeted course
         }
       })
         .then(() => {
-          res.locals.success = true;
+          res.locals.success = true; //respond with a JSON object with an error indicator
           next();
         })
         .catch(error => {
           next(error);
         });
     } else {
-      next(new Error("User must log in."));
+      next(new Error("User must log in.")); //pass an error through to the next middleware function 
     }
   },
-  filterUserCourses: (req, res, next) => {
+  filterUserCourses: (req, res, next) => { 
     let currentUser = res.locals.currentUser;
-    if (currentUser) {
-      let mappedCourses = res.locals.courses.map(course => {
+    if (currentUser) { //check whether a user is logged in 
+      let mappedCourses = res.locals.courses.map(course => { //modify course data to add a flag indicating user association
         let userJoined = currentUser.courses.some(userCourse => {
-          return userCourse.equals(course._id);
+          return userCourse.equals(course._id); //check whether the course exists in the user's courses array
         });
         return Object.assign(course.toObject(), { joined: userJoined });
       });
