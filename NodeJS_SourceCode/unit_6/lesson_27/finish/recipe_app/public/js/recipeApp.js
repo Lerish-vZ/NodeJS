@@ -20,18 +20,18 @@ $(document).ready(() => {
         );
       });
     }).then(() => {
-      addJoinButtonListener();
+      addJoinButtonListener(); //call addJoinButtonListener to add an event listener on your buttons after the AJAX request completes
     });
   });
 });
 
-let addJoinButtonListener = () => {
-  $(".join-button").click(event => {
+let addJoinButtonListener = () => { //create the event listener for the modal button
+  $(".join-button").click(event => { 
     let $button = $(event.target),
-      courseId = $button.data("id");
-    $.get(`/api/courses/${courseId}/join`, (results = {}) => {
+      courseId = $button.data("id"); //grab the button and button ID data
+    $.get(`/api/courses/${courseId}/join`, (results = {}) => { //make an AJAX request with the course's ID to join
       let data = results.data;
-      if (data && data.success) {
+      if (data && data.success) { //check whether the join action was successful, and modify the button
         $button
           .text("Joined")
           .addClass("joined-button")
