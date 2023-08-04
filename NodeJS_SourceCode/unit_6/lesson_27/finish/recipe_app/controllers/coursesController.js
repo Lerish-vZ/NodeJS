@@ -114,11 +114,11 @@ module.exports = {
     if (redirectPath !== undefined) res.redirect(redirectPath);
     else next();
   },
-  respondJSON: (req, res) => {
+  respondJSON: (req, res) => { //handle the request from previous middleware and submit response
     res.json({
       status: httpStatus.OK,
       data: res.locals
-    });
+    }); //respond with the response's local data in JSON format
   },
   errorJSON: (error, req, res, next) => {
     let errorObject;
