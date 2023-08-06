@@ -1,10 +1,10 @@
-$(document).ready(() => {
-  $("#modal-button").click(() => {
-    $(".modal-body").html("");
-    $.get(`/api/courses`, (results = {}) => {
+$(document).ready(() => { //wait for the DOM to load
+  $("#modal-button").click(() => { //handle a click event on the modal button
+    $(".modal-body").html(""); //reset the modal body's contents to an empty string
+    $.get(`/api/courses`, (results = {}) => { //fetch course data via an AJAX GET request
       let data = results.data;
       if (!data || !data.courses) return;
-      data.courses.forEach(course => {
+      data.courses.forEach(course => { //loop through each course, and append to the modal body
         $(".modal-body").append(
           `<div>
 						<span class="course-title">
@@ -21,7 +21,7 @@ $(document).ready(() => {
         );
       });
     }).then(() => {
-      addJoinButtonListener();
+      addJoinButtonListener(); //call addJoinButtonListener to add an event listner on the course listing
     });
   });
 });
@@ -31,7 +31,7 @@ let addJoinButtonListener = () => {
     let $button = $(event.target),
       courseId = $button.data("id");
 			console.log(`/api/courses/${courseId}/join`)
-    $.get(`/api/courses/${courseId}/join`, (results = {}) => {
+    $.get(`/api/courses/${courseId}/join`, (results = {}) => { //make an API call to join the selected course
       let data = results.data;
       if (data && data.success) {
         $button
