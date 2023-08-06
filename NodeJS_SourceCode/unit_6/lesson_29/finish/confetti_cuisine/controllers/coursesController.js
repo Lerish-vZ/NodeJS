@@ -151,19 +151,19 @@ module.exports = {
   },
   join: (req, res, next) => {
     let courseId = req.params.id,
-      currentUser = req.user;
-    if (currentUser) {
-      User.findByIdAndUpdate(currentUser, {
+      currentUser = req.user; //define local variables for course and user IDs
+    if (currentUser) { //check whether the user is logged in
+      User.findByIdAndUpdate(currentUser, { //find and update the user to connect the selected course
         $addToSet: {
           courses: courseId
         }
       })
         .then(() => {
           res.locals.success = true;
-          next();
+          next(); //continue to next middleware 
         })
         .catch(error => {
-          next(error);
+          next(error); //continue to error middleware with an error message if the user failed to enroll
         });
     } else {
       next(new Error("User must log in."));
