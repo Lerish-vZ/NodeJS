@@ -113,13 +113,13 @@ module.exports = {
         next();
       });
   },
-  respondJSON: (req, res) => {
+  respondJSON: (req, res) => { //return a courses array through the data property 
     res.json({
       status: httpStatus.OK,
       data: res.locals
     });
   },
-  errorJSON: (error, req, res, next) => {
+  errorJSON: (error, req, res, next) => { //return an error message and status code of 500 if an error occurs
     let errorObject;
     if (error) {
       errorObject = {
@@ -134,7 +134,7 @@ module.exports = {
     }
     res.json(errorObject);
   },
-  filterUserCourses: (req, res, next) => {
+  filterUserCourses: (req, res, next) => { //check whether the user is logged in and return an array of courses with joined property reflecting user association
     let currentUser = res.locals.currentUser;
     if (currentUser) {
       let mappedCourses = res.locals.courses.map(course => {
