@@ -1,14 +1,37 @@
-const http = require("http");
+///////////////////////////////////////////
+// const http = require("http");
+// const server = http.createServer((req, res) => {
+//  if(req.url === '/about')
+//     res.end('The about page')
+//   else if(req.url === '/contact')
+//     res.end('The contact page')
+//   else if(req.url === '/')
+//     res.end('The home page')
+//   else { 
+//     res.writeHead(404) //writeHead writes the status code of the request.
+//     res.end('page not found')
+//   }
+// });
+// server.listen(3000);
+///////////////////////////////////////////////
+
+const http = require('http')
+const fs = require('fs') //import file system module 'fs'. Helps interact with files on server.
+const homePage = fs.readFileSync('index.html') //readFileSync reads file contents and returns it.
+const aboutPage = fs.readFileSync('about.html')
+const contactPage = fs.readFileSync('contact.html')
+const notFoundPage = fs.readFileSync('notFound.html')
+
 const server = http.createServer((req, res) => {
- if(req.url === '/about')
-    res.end('The about page')
+  if(req.url === '/about')
+    res.end(aboutPage)
   else if(req.url === '/contact')
-    res.end('The contact page')
+    res.end(contactPage)
   else if(req.url === '/')
-    res.end('The home page')
-  else { 
-    res.writeHead(404) //writeHead writes the status code of the request.
-    res.end('page not found')
+    res.end(homePage)
+  else {
+    res.writeHead(404) 
+    res.end(notFoundPage)
   }
-});
-server.listen(3000);
+})
+server.listen(3000)
