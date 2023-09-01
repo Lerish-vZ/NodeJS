@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {
   else if(req.url === '/')
     res.end('The home page')
   else { 
-    res.writeHead(404)
+    res.writeHead(404) //writeHead writes the status code of the request.
     res.end('page not found')
   }
 });
