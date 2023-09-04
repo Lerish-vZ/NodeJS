@@ -9,7 +9,7 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     //res.sendFile(path.resolve(__dirname, 'views/index.html'));
-    
+    res.render('index');
 });
 
 app.get('/about', (req, res) => {
