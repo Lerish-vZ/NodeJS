@@ -8,19 +8,23 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'views/index.html'));
+    //res.sendFile(path.resolve(__dirname, 'views/index.html'));
+    
 });
 
 app.get('/about', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'views/about.html'));
+    //res.sendFile(path.resolve(__dirname, 'views/about.html'));
+    res.render('about');
 });
 
 app.get('/contact', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'views/contact.html'));
+    //res.sendFile(path.resolve(__dirname, 'views/contact.html'));
+    res.render('contact');
 });
 
 app.get('/post', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'views/post.html'));
+    //res.sendFile(path.resolve(__dirname, 'views/post.html'));
+    res.render('post');
 });
 
 app.listen(3000, () => {
