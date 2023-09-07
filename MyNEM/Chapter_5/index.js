@@ -4,7 +4,7 @@ const app = new express();
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/my_database', {useNewUrlParser: true}); 
+mongoose.connect('mongodb://127.0.0.1/my_database', {useNewUrlParser: true}); 
 
 app.set('view engine', 'ejs');
 
