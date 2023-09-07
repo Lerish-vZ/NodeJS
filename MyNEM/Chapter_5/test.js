@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const BlogPost = require("./models/BlogPost");
 
-mongoose.connect("mongodb://localhost/my_database", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/my_database", { useNewUrlParser: true });
 
+mongoose.Promise = global.Promise; //pasted
 // BlogPost.create(
 //   {
 //     title: "The Mythbuster Guide to Saving Money on Energy Bills",
@@ -38,10 +39,9 @@ BlogPost.find({})
     console.log(error);
   });
 
-BlogPost.find(
-  {
-    title: "The Mythbuster’s Guide to Saving Money on Energy Bills",
-  })
+BlogPost.find({
+  title: "The Mythbuster’s Guide to Saving Money on Energy Bills",
+})
   .then((blogpost) => {
     console.log(blogpost);
   })
@@ -49,10 +49,9 @@ BlogPost.find(
     console.log(error);
   }); //query for particular title
 
-BlogPost.find(
-  {
-    title: /The/,
-  })
+BlogPost.find({
+  title: /The/,
+})
   .then((blogpost) => {
     console.log(blogpost);
   })
@@ -60,10 +59,9 @@ BlogPost.find(
     console.log(error);
   }); //finds all documents with 'The' in Title. / acts like % (wildcard)
 
-var id = ""; //get the id;
+var id = "5cb436980b33147489eadfbb"; //get the id;
 
-BlogPost.findById(
-  {id})
+BlogPost.findById(id)
   .then((blogpost) => {
     console.log(blogpost);
   })
@@ -71,16 +69,20 @@ BlogPost.findById(
     console.log(error);
   });
 
-BlogPost.findByIdAndUpdate(
-  id,
-  {
-    title: "Updated title",
-  },
-  (error, blogspot) => {
-    console.log(error, blogspot);
-  }
-);
+BlogPost.findByIdAndUpdate(id, {
+  title: "Updated title",
+})
+  .then((blogpost) => {
+    console.log(blogpost);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
-BlogPost.findByIdAndDelete(id, (error, blogspot) => {
-  console.log(error, blogspot);
-});
+BlogPost.findByIdAndDelete({ id })
+  .then((blogpost) => {
+    console.log(blogpost);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
