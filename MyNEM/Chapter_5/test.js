@@ -35,3 +35,10 @@ BlogPost.find(
     console.log(error, blogspot);
   }
 ); //finds all documents with 'The' in Title. / acts like % (wildcard)
+
+
+var id = "" //get the id;
+
+BlogPost.findById(id, (error, blogspot) =>{ //find specific doc by id
+console.log(error,blogspot)
+})
