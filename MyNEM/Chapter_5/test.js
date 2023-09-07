@@ -26,3 +26,12 @@ BlogPost.find(
     console.log(error, blogspot);
   }
 ); //query for particular title
+
+BlogPost.find(
+  {
+    title: /The/,
+  },
+  (error, blogspot) => {
+    console.log(error, blogspot);
+  }
+); //finds all documents with 'The' in Title. / acts like % (wildcard)
