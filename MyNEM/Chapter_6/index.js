@@ -13,8 +13,11 @@ app.use(express.static("public"));
 app.use(express.json()); //in post function gets data from browser via request body attribute
 app.use(express.urlencoded()); //installs body parsing middleware
 
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/", async (req, res) => {
+  const blogpost = await BlogPost.find({});
+  res.render("index", {
+    blogposts: blogposts
+  });
 });
 
 app.get("/about", (req, res) => {
