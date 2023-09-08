@@ -34,8 +34,8 @@
             </a>
             <p class="post-meta">
               Posted by
-              <a href="#!">Start Bootstrap</a>
-              on September 24, 2023
+              <a href="#!"><%= blogpost[i].username %></a>
+              on <%= blogposts[i].datePosted.toDateString() %>
             </p>
           </div>
           <!-- Divider-->
@@ -95,7 +95,8 @@
         </div>
       </div>
     </div>
-    <%- include('layouts/footer'); -%> <%- include('layouts/scripts'); -%>
+    <%- include('layouts/footer'); -%> 
+    <%- include('layouts/scripts'); -%>
     <!-- Footer-->
   </body>
 </html>
