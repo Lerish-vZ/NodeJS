@@ -15,8 +15,8 @@ app.use(express.urlencoded()); //installs body parsing middleware
 
 app.get("/", async (req, res) => {
   const blogpost = await BlogPost.find({});
-  res.render("index", {
-    blogposts: blogposts
+  res.render("index", { //pass back blogposts data to client browser by providing it as the 2nd argument to render
+    blogposts
   });
 });
 
