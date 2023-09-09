@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const BlogPostSchema = new Schema({
   title: String,
   body: String,
-  username: string,
+  username: String,
   datePosted: {
     /* can declare property type with an object like this because
         we need 'default' */
