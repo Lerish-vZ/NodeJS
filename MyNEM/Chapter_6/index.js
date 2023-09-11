@@ -39,9 +39,9 @@ app.get("/posts/new", (req, res) => {
   res.render("create");
 });
 
-app.post("/posts/store", (req, res) => { //used to create records on server
+app.post("/posts/store", async (req, res) => { //used to create records on server
   //model creates a new doc with browser data
-  BlogPost.create({req.body}) 
+ await BlogPost.create(req.body) 
   .then((blogpost) => {
     res.redirect("/"); 
   }) //req.body has the browser form data
