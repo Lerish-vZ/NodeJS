@@ -41,10 +41,15 @@ app.get("/posts/new", (req, res) => {
 
 app.post("/posts/store", (req, res) => { //used to create records on server
   //model creates a new doc with browser data
-  BlogPost.create(req.body, (error, blogpost) =>{ //req.body has the browser form data
-  res.redirect("/");
-  })
-});
+  BlogPost.create({req.body}) 
+  .then((blogpost) => {
+    res.redirect("/"); 
+  }) //req.body has the browser form data
+  
+  .catch((error) => {
+    console.log(error);
+  });
+ });
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");

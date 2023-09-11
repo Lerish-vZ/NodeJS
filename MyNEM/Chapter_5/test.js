@@ -8,7 +8,7 @@ mongoose.connect("mongodb://127.0.0.1/my_database", { useNewUrlParser: true });
 
 // BlogPost.create({
 //   title: "The Mythbuster Guide to Saving Money on Energy Bills",
-//   body:
+//   body: 
 //     "If you have been here a long time, you might remember when I " +
 //     "went on ITV Tonight to dispense a masterclass in saving money on energy " +
 //     "bills. Energy-saving is one of my favourite money topics, because once " +
