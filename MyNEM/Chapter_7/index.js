@@ -42,16 +42,14 @@ app.get("/posts/new", (req, res) => {
   res.render("create");
 });
 
-app.post("/posts/store", async (req, res) => {
-  //used to create records on server
+app.post("/posts/store", (req, res) => {
   let image = req.files.image;
-  image.mv(path.resolve(__dirname, "public/img", image.name));
-  //model creates a new doc with browser data
-  await BlogPost.create(req.body)
-    .then((blogpost) => {
+  image
+    .mv(path.resolve(__dirname, "public/img", image.name))
+    .then(() => BlogPost.create({ ...req.body, image: "/img/" + image.name }))
+    .then((BlogPost) => {
       res.redirect("/");
-    }) //req.body has the browser form data
-
+    })
     .catch((error) => {
       console.log(error);
     });
