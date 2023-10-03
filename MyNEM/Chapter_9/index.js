@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const BlogPost = require("./models/BlogPost");
 const fileUpload = require("express-fileupload");
 
+const newPostController = require('./controllers/newPost');
+
 const customMiddleWare = (req, res, next) => {
   console.log("Custom middle ware called");
   next();
@@ -40,13 +42,6 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.get("/about", (req, res) => {
-  res.render("about");
-});
-
-app.get("/contact", (req, res) => {
-  res.render("contact");
-});
 
 app.get("/post/:id", async (req, res) => {
   const blogpost = await BlogPost.findById(req.params.id);
@@ -55,9 +50,7 @@ app.get("/post/:id", async (req, res) => {
   });
 });
 
-app.get("/posts/new", (req, res) => {
-  res.render("create");
-});
+app.get('/posts/new', newPostController);
 
 app.post("/posts/store", (req, res) => {
   let image = req.files.image;
