@@ -17,12 +17,12 @@ const customMiddleWare = (req, res, next) => {
 };
 app.use(customMiddleWare);
 
-const validateMiddleWare = (req, res, next) => {
-  if (req.files == null || req.body.title == null) {
-    return res.redirect("/posts/new");
-  }
-  next();
-};
+// const validateMiddleWare = (req, res, next) => {
+//   if (req.files == null || req.body.title == null) {
+//     return res.redirect("/posts/new");
+//   }
+//   next();
+// };
 
 mongoose.connect("mongodb://127.0.0.1/my_database", { useNewUrlParser: true });
 
