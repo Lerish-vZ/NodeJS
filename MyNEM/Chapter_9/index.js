@@ -5,17 +5,18 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 // const BlogPost = require("./models/BlogPost");
 const fileUpload = require("express-fileupload");
+const validateMiddleware = require("./middleware/validationMiddleware");
 
 const newPostController = require("./controllers/newPost");
 const homeController = require("./controllers/home");
 const storePostController = require("./controllers/storePost");
 const getPostController = require("./controllers/getPost");
 
-const customMiddleWare = (req, res, next) => {
-  console.log("Custom middle ware called");
-  next();
-};
-app.use(customMiddleWare);
+// const customMiddleWare = (req, res, next) => {
+//   console.log("Custom middle ware called");
+//   next();
+// };
+// app.use(customMiddleWare);
 
 // const validateMiddleWare = (req, res, next) => {
 //   if (req.files == null || req.body.title == null) {
@@ -76,7 +77,7 @@ app.get("posts/new", newPostController);
 //       console.log(error);
 //     });
 // });
-app.use("/posts/store", validateMiddleWare);
+app.use("/posts/store", validateMiddleware);
 app.post("/posts/store", storePostController);
 
 app.listen(3000, () => {
