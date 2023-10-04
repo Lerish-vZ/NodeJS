@@ -30,8 +30,6 @@ app.set("view engine", "ejs");
 
 app.use(fileUpload());
 
-app.use("/posts/store", validateMiddleWare);
-
 app.use(express.static("public"));
 app.use(express.json()); //in post function gets data from browser via request body attribute
 app.use(express.urlencoded()); //installs body parsing middleware
@@ -45,13 +43,13 @@ app.use(express.urlencoded()); //installs body parsing middleware
 // });
 app.get("/", homeController);
 
-// app.get("/about", (req, res) => {
-//   res.render("about");
-// });
+app.get("/about", (req, res) => {
+  res.render("about");
+});
 
-// app.get("/contact", (req, res) => {
-//   res.render("contact");
-// });
+app.get("/contact", (req, res) => {
+  res.render("contact");
+});
 
 // app.get("/post/:id", async (req, res) => {
 //   const blogpost = await BlogPost.findById(req.params.id);
@@ -78,6 +76,7 @@ app.get("posts/new", newPostController);
 //       console.log(error);
 //     });
 // });
+app.use("/posts/store", validateMiddleWare);
 app.post("/posts/store", storePostController);
 
 app.listen(3000, () => {
