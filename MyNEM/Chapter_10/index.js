@@ -7,15 +7,15 @@ const mongoose = require("mongoose");
 const fileUpload = require("express-fileupload");
 const validateMiddleware = require("./middleware/validationMiddleware");
 
-const newPostController = require('./controllers/newPost')
+const newPostController = require("./controllers/newPost");
 const homeController = require("./controllers/home");
 const storePostController = require("./controllers/storePost");
 const getPostController = require("./controllers/getPost");
 
 const newUserController = require("./controllers/newUser");
 const newUser = require("./controllers/newUser");
-const storeUserController = require('./controllers/storeUser');
-const loginController = require('./controllers/login');
+const storeUserController = require("./controllers/storeUser");
+const loginController = require("./controllers/login");
 
 // const customMiddleWare = (req, res, next) => {
 //   console.log("Custom middle ware called");
@@ -50,9 +50,11 @@ app.get("/posts/new", newPostController);
 app.use("/posts/store", validateMiddleware);
 app.post("/posts/store", storePostController);
 
-app.get('/auth/register', newUserController);
+app.get("/auth/register", newUserController);
 
-app.post('/users/register', storeUserController);
+app.post("/users/register", storeUserController);
+
+app.get("/auth/login", loginController);
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");
