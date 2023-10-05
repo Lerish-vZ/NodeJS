@@ -1,19 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const BlogPostSchema = new Schema({
-  title: String,
-  body: String,
+const UserSchema = new Schema({
   username: String,
-  datePosted: {
-    /* can declare property type with an object like this because
-        we need 'default' */
-    type: Date,
-    default: new Date(),
-  },
-  image: String
+  password: String
 });
 
-const BlogPost = mongoose.model("BlogPost", BlogPostSchema);
+const User = mongoose.model("User", UserSchemaSchema);
 
-module.exports = BlogPost;
+module.exports = User;
