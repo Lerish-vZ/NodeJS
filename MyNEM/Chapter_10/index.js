@@ -12,6 +12,9 @@ const homeController = require("./controllers/home");
 const storePostController = require("./controllers/storePost");
 const getPostController = require("./controllers/getPost");
 
+const newUserController = require("./controllers/newUser");
+const newUser = require("./controllers/newUser");
+
 // const customMiddleWare = (req, res, next) => {
 //   console.log("Custom middle ware called");
 //   next();
@@ -56,6 +59,8 @@ app.get("/posts/new", newPostController);
 // });
 app.use("/posts/store", validateMiddleware);
 app.post("/posts/store", storePostController);
+
+app.get('/auth/register', newUserController);
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");
