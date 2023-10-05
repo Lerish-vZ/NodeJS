@@ -15,6 +15,7 @@ const getPostController = require("./controllers/getPost");
 const newUserController = require("./controllers/newUser");
 const newUser = require("./controllers/newUser");
 const storeUserController = require('./controllers/storeUser');
+const loginController = require('./controllers/login');
 
 // const customMiddleWare = (req, res, next) => {
 //   console.log("Custom middle ware called");
@@ -46,18 +47,6 @@ app.get("/post/:id", getPostController);
 
 app.get("/posts/new", newPostController);
 
-// app.post("/posts/store", (req, res) => {
-//   let image = req.files.image;
-//   image
-//     .mv(path.resolve(__dirname, "public/img", image.name))
-//     .then(() => BlogPost.create({ ...req.body, image: "/img/" + image.name }))
-//     .then((BlogPost) => {
-//       res.redirect("/");
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// });
 app.use("/posts/store", validateMiddleware);
 app.post("/posts/store", storePostController);
 
