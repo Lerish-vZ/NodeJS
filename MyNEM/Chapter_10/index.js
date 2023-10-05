@@ -16,6 +16,7 @@ const newUserController = require("./controllers/newUser");
 const newUser = require("./controllers/newUser");
 const storeUserController = require("./controllers/storeUser");
 const loginController = require("./controllers/login");
+const loginUserController = require("./controllers/loginUser");
 
 // const customMiddleWare = (req, res, next) => {
 //   console.log("Custom middle ware called");
@@ -55,6 +56,7 @@ app.get("/auth/register", newUserController);
 app.post("/users/register", storeUserController);
 
 app.get("/auth/login", loginController);
+app.post("/users/login", loginUserController);
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");
