@@ -21,11 +21,6 @@ const loginController = require("./controllers/login");
 const loginUserController = require("./controllers/loginUser");
 const authMiddleware = require("./middleware/authMiddleware");
 const redirectIfAuthenticatedMiddleware = require("./middleware/redirectIfAuthenticatedMiddleware");
-// const customMiddleWare = (req, res, next) => {
-//   console.log("Custom middle ware called");
-//   next();
-// };
-// app.use(customMiddleWare);
 
 mongoose.connect("mongodb://127.0.0.1/my_database", { useNewUrlParser: true });
 
@@ -36,6 +31,13 @@ app.use(fileUpload());
 app.use(express.static("public"));
 app.use(express.json()); //in post function gets data from browser via request body attribute
 app.use(express.urlencoded()); //installs body parsing middleware
+
+global.loggedIn = null;
+
+app.us("*", (req, res, next) => { //'*' specifies this must be done on all requests
+  loggedIn = req.session.userId;
+  next();
+})
 
 app.use(
   expressSession({
@@ -60,25 +62,12 @@ app.get("/posts/new", authMiddleware, newPostController);
 app.use("/posts/store", validateMiddleware);
 app.post("/posts/store", authMiddleware, storePostController);
 
-app.get("/auth/register", newUserController);
-
-app.post("/users/register", storeUserController);
-
-app.get("/auth/login", loginController);
-app.post("/users/login", loginUserController);
-
 app.get("/auth/register", redirectIfAuthenticatedMiddleware, newUserController);
-app.post(
-  "/users/register",
-  redirectIfAuthenticatedMiddleware,
-  storeUserController
-);
+
+app.post("/users/register", redirectIfAuthenticatedMiddleware, storeUserController);
+
 app.get("/auth/login", redirectIfAuthenticatedMiddleware, loginController);
-app.post(
-  "/users/login",
-  redirectIfAuthenticatedMiddleware,
-  loginUserController
-);
+app.post("/users/login", redirectIfAuthenticatedMiddleware, loginUserController);
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");
