@@ -7,8 +7,9 @@ module.exports = (req, res) => {
       res.redirect("/");
     })
     .catch((error) => {
-      console.log(error);
-      Object.keys(error.errors).map((key) => error.errors[key].message);
+      // console.log(error);
+      const validationErrors = Object.keys(error.errors).map((key) => error.errors[key].message);
+      req.session.validationErrors = validationErrors;
       res.redirect("/auth/register");
     });
 };
