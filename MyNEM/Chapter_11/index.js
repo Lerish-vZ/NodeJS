@@ -32,14 +32,13 @@ app.use(express.static("public"));
 app.use(express.json()); //in post function gets data from browser via request body attribute
 app.use(express.urlencoded()); //installs body parsing middleware
 
-global.loggedIn = null;
-
 app.use(
   expressSession({
-    secret: "keyboard cat",
+    secret: "keyboard cat", //secret properties string value is used by express-session package to sign and encrypt the session ID cookie being shared with the browser
   })
 );
 
+global.loggedIn = null;
 app.use("*", (req, res, next) => { //'*' specifies this must be done on all requests
   loggedIn = req.session.userId;
   next();
