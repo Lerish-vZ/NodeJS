@@ -21,6 +21,7 @@ const loginController = require("./controllers/login");
 const loginUserController = require("./controllers/loginUser");
 const authMiddleware = require("./middleware/authMiddleware");
 const redirectIfAuthenticatedMiddleware = require("./middleware/redirectIfAuthenticatedMiddleware");
+const logoutController = require('./controllers/logout');
 
 mongoose.connect("mongodb://127.0.0.1/my_database", { useNewUrlParser: true });
 
@@ -75,6 +76,8 @@ app.post(
   redirectIfAuthenticatedMiddleware,
   loginUserController
 );
+
+app.get('/auth/logout', logoutController);
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");
