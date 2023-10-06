@@ -79,6 +79,9 @@ app.post(
 
 app.get('/auth/logout', logoutController);
 
+
+app.use((req, res) => res.render('notfound'));
+
 app.listen(3000, () => {
   console.log("App listening on port 3000");
 });
