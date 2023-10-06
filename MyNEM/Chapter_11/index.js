@@ -5,6 +5,8 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 // const BlogPost = require("./models/BlogPost");
 const fileUpload = require("express-fileupload");
+const expressSession = require("express-session");
+
 const validateMiddleware = require("./middleware/validationMiddleware");
 
 const newPostController = require("./controllers/newPost");
@@ -33,6 +35,12 @@ app.use(fileUpload());
 app.use(express.static("public"));
 app.use(express.json()); //in post function gets data from browser via request body attribute
 app.use(express.urlencoded()); //installs body parsing middleware
+
+app.use(
+  expressSession({
+    secret: "keyboard cat",
+  })
+);
 
 app.get("/", homeController);
 
