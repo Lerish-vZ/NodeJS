@@ -19,6 +19,7 @@ const newUser = require("./controllers/newUser");
 const storeUserController = require("./controllers/storeUser");
 const loginController = require("./controllers/login");
 const loginUserController = require("./controllers/loginUser");
+const authMiddleware = require('./middleware/authMiddleware');
 
 // const customMiddleWare = (req, res, next) => {
 //   console.log("Custom middle ware called");
@@ -54,10 +55,10 @@ app.get("/contact", (req, res) => {
 
 app.get("/post/:id", getPostController);
 
-app.get("/posts/new", newPostController);
+app.get("/posts/new", authMiddleware, newPostController);
 
 app.use("/posts/store", validateMiddleware);
-app.post("/posts/store", storePostController);
+app.post("/posts/store", authMiddleware, storePostController);
 
 app.get("/auth/register", newUserController);
 
