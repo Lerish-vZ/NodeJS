@@ -34,16 +34,16 @@ app.use(express.urlencoded()); //installs body parsing middleware
 
 global.loggedIn = null;
 
-app.use("*", (req, res, next) => { //'*' specifies this must be done on all requests
-  loggedIn = req.session.userId;
-  next();
-})
-
 app.use(
   expressSession({
     secret: "keyboard cat",
   })
 );
+
+app.use("*", (req, res, next) => { //'*' specifies this must be done on all requests
+  loggedIn = req.session.userId;
+  next();
+});
 
 app.get("/", homeController);
 
@@ -64,10 +64,18 @@ app.post("/posts/store", authMiddleware, storePostController);
 
 app.get("/auth/register", redirectIfAuthenticatedMiddleware, newUserController);
 
-app.post("/users/register", redirectIfAuthenticatedMiddleware, storeUserController);
+app.post(
+  "/users/register",
+  redirectIfAuthenticatedMiddleware,
+  storeUserController
+);
 
 app.get("/auth/login", redirectIfAuthenticatedMiddleware, loginController);
-app.post("/users/login", redirectIfAuthenticatedMiddleware, loginUserController);
+app.post(
+  "/users/login",
+  redirectIfAuthenticatedMiddleware,
+  loginUserController
+);
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");
