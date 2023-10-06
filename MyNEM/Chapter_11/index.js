@@ -20,7 +20,7 @@ const storeUserController = require("./controllers/storeUser");
 const loginController = require("./controllers/login");
 const loginUserController = require("./controllers/loginUser");
 const authMiddleware = require('./middleware/authMiddleware');
-
+const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware')
 // const customMiddleWare = (req, res, next) => {
 //   console.log("Custom middle ware called");
 //   next();
