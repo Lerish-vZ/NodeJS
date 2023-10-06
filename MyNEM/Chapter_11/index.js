@@ -34,7 +34,7 @@ app.use(express.urlencoded()); //installs body parsing middleware
 
 global.loggedIn = null;
 
-app.us("*", (req, res, next) => { //'*' specifies this must be done on all requests
+app.use("*", (req, res, next) => { //'*' specifies this must be done on all requests
   loggedIn = req.session.userId;
   next();
 })
