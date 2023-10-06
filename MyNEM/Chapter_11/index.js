@@ -19,8 +19,8 @@ const newUser = require("./controllers/newUser");
 const storeUserController = require("./controllers/storeUser");
 const loginController = require("./controllers/login");
 const loginUserController = require("./controllers/loginUser");
-const authMiddleware = require('./middleware/authMiddleware');
-const redirectIfAuthenticatedMiddleware = require('./middleware/redirectIfAuthenticatedMiddleware')
+const authMiddleware = require("./middleware/authMiddleware");
+const redirectIfAuthenticatedMiddleware = require("./middleware/redirectIfAuthenticatedMiddleware");
 // const customMiddleWare = (req, res, next) => {
 //   console.log("Custom middle ware called");
 //   next();
@@ -66,6 +66,19 @@ app.post("/users/register", storeUserController);
 
 app.get("/auth/login", loginController);
 app.post("/users/login", loginUserController);
+
+app.get("/auth/register", redirectIfAuthenticatedMiddleware, newUserController);
+app.post(
+  "/users/register",
+  redirectIfAuthenticatedMiddleware,
+  storeUserController
+);
+app.get("/auth/login", redirectIfAuthenticatedMiddleware, loginController);
+app.post(
+  "/users/login",
+  redirectIfAuthenticatedMiddleware,
+  loginUserController
+);
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");
