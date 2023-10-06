@@ -22,6 +22,7 @@ const loginUserController = require("./controllers/loginUser");
 const authMiddleware = require("./middleware/authMiddleware");
 const redirectIfAuthenticatedMiddleware = require("./middleware/redirectIfAuthenticatedMiddleware");
 const logoutController = require('./controllers/logout');
+const flash = require('connect-flash');
 
 mongoose.connect("mongodb://127.0.0.1/my_database", { useNewUrlParser: true });
 
@@ -32,6 +33,8 @@ app.use(fileUpload());
 app.use(express.static("public"));
 app.use(express.json()); //in post function gets data from browser via request body attribute
 app.use(express.urlencoded()); //installs body parsing middleware
+
+app.use(flash());
 
 app.use(
   expressSession({
