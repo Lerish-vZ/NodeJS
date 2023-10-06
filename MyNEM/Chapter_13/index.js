@@ -21,8 +21,8 @@ const loginController = require("./controllers/login");
 const loginUserController = require("./controllers/loginUser");
 const authMiddleware = require("./middleware/authMiddleware");
 const redirectIfAuthenticatedMiddleware = require("./middleware/redirectIfAuthenticatedMiddleware");
-const logoutController = require('./controllers/logout');
-const flash = require('connect-flash');
+const logoutController = require("./controllers/logout");
+const flash = require("connect-flash");
 
 mongoose.connect("mongodb://127.0.0.1/my_database", { useNewUrlParser: true });
 
@@ -32,7 +32,7 @@ app.use(fileUpload());
 
 app.use(express.static("public"));
 app.use(express.json()); //in post function gets data from browser via request body attribute
-app.use(express.urlencoded()); //installs body parsing middleware
+app.use(express.urlencoded({ extended: true })); //installs body parsing middleware
 
 app.use(flash());
 
@@ -43,7 +43,8 @@ app.use(
 );
 
 global.loggedIn = null;
-app.use("*", (req, res, next) => { //'*' specifies this must be done on all requests
+app.use("*", (req, res, next) => {
+  //'*' specifies this must be done on all requests
   loggedIn = req.session.userId;
   next();
 });
@@ -80,10 +81,9 @@ app.post(
   loginUserController
 );
 
-app.get('/auth/logout', logoutController);
+app.get("/auth/logout", logoutController);
 
-
-app.use((req, res) => res.render('notfound'));
+app.use((req, res) => res.render("notfound"));
 
 app.listen(3000, () => {
   console.log("App listening on port 3000");

@@ -12,4 +12,4 @@ module.exports = (req, res) => {
         username: username, 
         password: password
     }) //render register.ejs
-}
+} 

@@ -14,3 +14,4 @@ module.exports = (req, res) => {
       res.redirect("/auth/register");
     });
 };
+ 
