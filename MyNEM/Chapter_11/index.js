@@ -31,7 +31,7 @@ app.use(fileUpload());
 
 app.use(express.static("public"));
 app.use(express.json()); //in post function gets data from browser via request body attribute
-app.use(express.urlencoded()); //installs body parsing middleware
+app.use(express.urlencoded({ extended: true })); //installs body parsing middleware
 
 app.use(
   expressSession({

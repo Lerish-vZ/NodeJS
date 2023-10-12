@@ -22,7 +22,7 @@ const validateMiddleWare = (req, res, next) => {
 
 mongoose.connect("mongodb://127.0.0.1/my_database", { useNewUrlParser: true });
 
-app.set("view engine", "ejs");
+app.set("view engine", "ejs"); 
 
 app.use(fileUpload());
 
@@ -30,7 +30,7 @@ app.use("/posts/store", validateMiddleWare);
 
 app.use(express.static("public"));
 app.use(express.json()); //in post function gets data from browser via request body attribute
-app.use(express.urlencoded()); //installs body parsing middleware
+app.use(express.urlencoded({ extended: true })); //installs body parsing middleware
 
 app.get("/", async (req, res) => {
   const blogposts = await BlogPost.find({});
