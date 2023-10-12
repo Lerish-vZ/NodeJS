@@ -24,7 +24,7 @@ const redirectIfAuthenticatedMiddleware = require("./middleware/redirectIfAuthen
 const logoutController = require("./controllers/logout");
 const flash = require("connect-flash");
 
-mongoose.connect("mongodb+srv://lerishavz:2ngFupuQIB1xmKhA@cluster0.jtnsc3u.mongodb.net/", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://lerishavz:2ngFupuQIB1xmKhA@cluster0.jtnsc3u.mongodb.net/my_database", { useNewUrlParser: true });
 
 app.set("view engine", "ejs");
 
